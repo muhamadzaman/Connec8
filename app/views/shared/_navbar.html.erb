@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Connec8</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+      <% if current_user%>
+        <li class="nav-item">
+          <%= link_to "News Feed", news_feed_posts_path, class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Search Users", search_users_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Profile", user_path(current_user), class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger ml-5' %>
+        </li>
+        <%else%>
+        <li class="nav-item">
+          <%= link_to 'Log In', new_user_session_path, class: 'btn btn-primary ml-5' %>
+        </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>

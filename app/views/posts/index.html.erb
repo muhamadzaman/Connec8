@@ -1,0 +1,8 @@
+<h1>News Feed</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <p><%= post.body %></p>
+    <p>Posted by <%= post.user.username %> on <%= post.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+<% end %>

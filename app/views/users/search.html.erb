@@ -1,0 +1,35 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>Search Results</h1>
+      <%= form_tag search_users_path, method: :get, class: "form-inline mt-3" do %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search by username", class: "form-control mr-sm-2" %>
+        <%= submit_tag "Search", class: "btn btn-outline-success mt-2" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+  <div class="col-12">
+    <% if @users.any? %>
+      <ul class="list-group">
+        <% @users.each do |user| %>
+          <% if user != current_user %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <%= user.username %>
+              <% if current_user.following?(user) %>
+                <%= button_to "Unfollow", relationship_path(current_user.active_relationships.find_by(followed_id: user), query: params[:query]), method: :delete, class: "btn btn-danger", remote: true %>
+              <% else %>
+                <%= button_to "Follow", relationships_path(user_id: user, query: params[:query]), class: "btn btn-primary", remote: true %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No users found.</p>
+    <% end %>
+  </div>
+</div>
+
+</div>

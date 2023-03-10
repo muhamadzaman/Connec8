@@ -1,0 +1,18 @@
+<%= form_for(post) do |f| %>
+  <% if post.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :body, class: 'form-label' %>
+    <%= f.text_area :body, class: 'form-control', rows: 5 %>
+  </div>
+
+  <%= f.submit 'Create Post', class: 'btn btn-primary' %>
+<% end %>
